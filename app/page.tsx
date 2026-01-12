@@ -3,9 +3,11 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Stage, Layer, Rect, Circle, Text, Group } from "react-konva";
 
+type TableType = "rect" | "square" | "circle" | "desk";
+
 type Table = {
   id: string;
-  type: string;
+  type: TableType;
   seats: number;
   x: number;
   y: number;
