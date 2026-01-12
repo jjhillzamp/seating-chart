@@ -1,20 +1,21 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Stage, Layer, Rect, Circle, Text, Group } from "react-konva";
-type TableType = "rect" | "square" | "circle" | "desk";
+
+type Table = {
+  id: string;
+  type: string;
+  seats: number;
+  x: number;
+  y: number;
+};
 
 type Student = {
   id: string;
   name: string;
 };
-type Assignments = Record<string, string>; // seatId -> studentId
-type Table = {
-  id: string;
-  type: TableType;
-  seats: number;
-  x: number;
-  y: number;
-};
+
 /**
  * Elementary Seating Chart Builder (Free Prototype)
  * - Drag/drop tables + desks onto a snap-to-grid room
