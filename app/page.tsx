@@ -112,7 +112,7 @@ function seatPositions({
   return pts.slice(0, seats);
 }
 
-function shapeLabel(type) {
+function shapeLabel(type: string): string {
   switch (type) {
     case "rect":
       return "Rectangle Table";
