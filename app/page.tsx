@@ -332,7 +332,7 @@ const pts = seatPositions({
     });
   }
 
-  function handleDragOverStage(e) {
+  function handleDragOverStage(e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
   }
