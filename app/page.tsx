@@ -161,7 +161,6 @@ export default function SeatingChartBuilder() {
   });
 
   const [tables, setTables] = useState<Table[]>([]);
-  const [students, setStudents] = useState<Student[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [assignments, setAssignments] = useState<Assignments>({});
   const [viewport, setViewport] = useState({ w: 900, h: 560 });
