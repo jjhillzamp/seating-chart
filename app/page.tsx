@@ -5,12 +5,18 @@ import { Stage, Layer, Rect, Circle, Text, Group } from "react-konva";
 
 type TableType = "rect" | "square" | "circle" | "desk";
 
+type TableType = "rect" | "square" | "circle" | "desk";
+
 type Table = {
   id: string;
+  name: string;
   type: TableType;
-  seats: number;
   x: number;
   y: number;
+  w: number;
+  h: number;
+  seats: number;
+  rotation: number;
 };
 
 type Student = {
