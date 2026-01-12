@@ -145,7 +145,7 @@ function shapeLabel(type: string): string {
 }
 
 export default function SeatingChartBuilder() {
-  const stageWrapRef = useRef(null);
+  const stageWrapRef = useRef<HTMLDivElement | null>(null);
 
   const [meta, setMeta] = useState({ className: "", date: "" });
   const [studentsText, setStudentsText] = useState(
