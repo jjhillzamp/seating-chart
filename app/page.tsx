@@ -257,7 +257,7 @@ export default function SeatingChartBuilder() {
     setAssignments({});
   }
 
-  function updateSelected(patch) {
+  function updateSelected(patch: Partial<Table>) {
     if (!selected) return;
     setTables((prev) => prev.map((t) => (t.id === selected.id ? { ...t, ...patch } : t)));
   }
