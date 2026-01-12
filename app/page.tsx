@@ -1,7 +1,20 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Stage, Layer, Rect, Circle, Text, Group } from "react-konva";
+type TableType = "rect" | "square" | "circle" | "desk";
 
+type Student = {
+  id: string;
+  name: string;
+};
+type Assignments = Record<string, string>; // seatId -> studentId
+type Table = {
+  id: string;
+  type: TableType;
+  seats: number;
+  x: number;
+  y: number;
+};
 /**
  * Elementary Seating Chart Builder (Free Prototype)
  * - Drag/drop tables + desks onto a snap-to-grid room
@@ -143,10 +156,10 @@ export default function SeatingChartBuilder() {
       .map((name) => ({ id: uid(), name }));
   });
 
-  const [tables, setTables] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
-  const [assignments, setAssignments] = useState({}); // seatId -> studentId
-
+  const [tables, setTables] = useState<Table[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [assignments, setAssignments] = useState<Assignments>({});
   const [viewport, setViewport] = useState({ w: 900, h: 560 });
 
   // Derived
