@@ -93,7 +93,7 @@ function seatPositions({
   const bottomCount = Math.ceil((seats - topCount - rightCount) / 2);
   const leftCount = seats - topCount - rightCount - bottomCount;
 
-  const spread = (count, len) => {
+  const spread = (count: number, len: number): number[] => {
     if (count <= 0) return [];
     if (count === 1) return [len / 2];
     const step = len / (count + 1);
