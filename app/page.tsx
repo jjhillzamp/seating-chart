@@ -554,7 +554,7 @@ const pts = seatPositions({
   );
 
   // Render seat circles + names for a table
-  function TableNode({ t }) {
+  function TableNode({ t }: { t: Table }) {
     const isSelected = t.id === selectedId;
     const pts = seatPositions(t);
 
