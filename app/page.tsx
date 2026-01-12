@@ -280,7 +280,7 @@ export default function SeatingChartBuilder() {
     });
   }
 
-  function handleDropToStage(e) {
+  function handleDropToStage(e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
     const studentId = e.dataTransfer.getData("application/x-student-id");
     if (!studentId) return;
