@@ -214,7 +214,7 @@ export default function SeatingChartBuilder() {
     return () => ro.disconnect();
   }, []);
 
-  function addTable(type) {
+  function addTable(type: "rect" | "square" | "circle" | "desk") {
     const { w, h } = defaultSizeFor(type);
     const id = uid();
     const t = {
