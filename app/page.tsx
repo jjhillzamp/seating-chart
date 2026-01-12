@@ -299,7 +299,14 @@ export default function SeatingChartBuilder() {
     // Find closest seat center among all seats
     let best = null;
     for (const t of tables) {
-      const pts = seatPositions(t);
+      const { w, h } = defaultSizeFor(t.type);
+
+const pts = seatPositions({
+  type: t.type,
+  w,
+  h,
+  seats: t.seats,
+});
       for (let i = 0; i < pts.length; i++) {
         const seatId = `${t.id}-s${i}`;
         const cx = t.x + pts[i].x;
