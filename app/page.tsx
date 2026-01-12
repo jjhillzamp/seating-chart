@@ -270,7 +270,7 @@ export default function SeatingChartBuilder() {
     e.dataTransfer.effectAllowed = "move";
   }
 
-  function unassignStudent(studentId) {
+  function unassignStudent(studentId: string) {
     setAssignments((prev) => {
       const next = { ...prev };
       for (const [seatId, sid] of Object.entries(next)) {
