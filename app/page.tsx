@@ -5,8 +5,6 @@ import { Stage, Layer, Rect, Circle, Text, Group } from "react-konva";
 
 type TableType = "rect" | "square" | "circle" | "desk";
 
-type TableType = "rect" | "square" | "circle" | "desk";
-
 type Table = {
   id: string;
   name: string;
