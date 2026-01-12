@@ -16,6 +16,9 @@ type Student = {
   name: string;
 };
 
+type Assignments = Record<string, string>;
+
+
 /**
  * Elementary Seating Chart Builder (Free Prototype)
  * - Drag/drop tables + desks onto a snap-to-grid room
