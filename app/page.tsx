@@ -262,7 +262,10 @@ export default function SeatingChartBuilder() {
     setTables((prev) => prev.map((t) => (t.id === selected.id ? { ...t, ...patch } : t)));
   }
 
-  function onStudentDragStart(e, studentId) {
+  function onStudentDragStart(
+  e: React.DragEvent<HTMLElement>,
+  studentId: string
+) {
     e.dataTransfer.setData("application/x-student-id", studentId);
     e.dataTransfer.effectAllowed = "move";
   }
