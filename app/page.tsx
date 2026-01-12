@@ -15,11 +15,11 @@ const STORAGE_KEY = "seat-chart-prototype-v1";
 
 const uid = () => Math.random().toString(36).slice(2, 10);
 
-function snap(n) {
+function snap(n: number) {
   return Math.round(n / GRID) * GRID;
 }
 
-function clamp(n, min, max) {
+function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));
 }
 
