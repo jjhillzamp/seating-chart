@@ -23,7 +23,7 @@ function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));
 }
 
-function defaultSeatsFor(type) {
+function defaultSeatsFor(type: "rect" | "square" | "circle" | "desk") {
   switch (type) {
     case "rect":
       return 6;
@@ -38,7 +38,7 @@ function defaultSeatsFor(type) {
   }
 }
 
-function defaultSizeFor(type) {
+function defaultSizeFor(type: "rect" | "square" | "circle" | "desk") {
   switch (type) {
     case "rect":
       return { w: 160, h: 90 };
@@ -53,7 +53,17 @@ function defaultSizeFor(type) {
   }
 }
 
-function seatPositions({ type, w, h, seats }) {
+function seatPositions({
+  type,
+  w,
+  h,
+  seats,
+}: {
+  type: "rect" | "square" | "circle" | "desk";
+  w: number;
+  h: number;
+  seats: number;
+}) {
   // Coordinates are relative to top-left of the table bounding box.
   const pad = 14;
   const pts = [];
