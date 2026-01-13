@@ -157,6 +157,15 @@ export default function SeatingChartBuilder() {
   const [studentsText, setStudentsText] = useState(
     "Ava\nBen\nCamila\nDiego\nEthan\nFatima\nGrace\nHugo\nIsabella\nJamal\nKai\nLuna"
   );
+const [draftName, setDraftName] = useState("");
+useEffect(() => {
+  if (selectedId) {
+    const table = tables.find((t) => t.id === selectedId);
+    if (table) {
+      setDraftName(table.name);
+    }
+  }
+}, [selectedId, tables]);
 
   const [students, setStudents] = useState(() => {
     return "Ava\nBen\nCamila\nDiego\nEthan\nFatima\nGrace\nHugo\nIsabella\nJamal\nKai\nLuna"
@@ -499,10 +508,15 @@ const pts = seatPositions({
           <div>
             <div className="text-xs font-semibold text-slate-600">Label</div>
             <input
-              className="mt-1 w-full rounded-xl border px-3 py-2 text-sm"
-              value={selected.name}
-              onChange={(e) => updateSelected({ name: e.target.value })}
-            />
+  className="mt-1 w-full rounded-xl border px-3 py-2 text-sm"
+  value={draftName}
+  onChange={(e) => setDraftName(e.target.value)}
+  onBlur={() => {
+    if (selectedId) {
+      updateSelected({ name: draftName });
+    }
+  }}
+/>
           </div>
 
           <div>
