@@ -160,14 +160,6 @@ export default function SeatingChartBuilder() {
 const [draftName, setDraftName] = useState("");
 const [tables, setTables] = useState<Table[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-useEffect(() => {
-  if (selectedId) {
-    const table = tables.find((t) => t.id === selectedId);
-    if (table) {
-      setDraftName(table.name);
-    }
-  }
-}, [selectedId, tables]);
 
   const [students, setStudents] = useState(() => {
     return "Ava\nBen\nCamila\nDiego\nEthan\nFatima\nGrace\nHugo\nIsabella\nJamal\nKai\nLuna"
@@ -180,6 +172,16 @@ useEffect(() => {
   
   const [assignments, setAssignments] = useState<Assignments>({});
   const [viewport, setViewport] = useState({ w: 900, h: 560 });
+
+  useEffect(() => {
+  if (selectedId) {
+    const table = tables.find((t) => t.id === selectedId);
+    if (table) {
+      setDraftName(table.name);
+    }
+  }
+}, [selectedId, tables]);
+
 
   // Derived
   const studentById = useMemo(() => {
