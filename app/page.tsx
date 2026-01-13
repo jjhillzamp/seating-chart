@@ -681,11 +681,17 @@ const pts = seatPositions({
               />
 
               <Stage
-                width={viewport.w}
-                height={viewport.h}
-                onMouseDown={() => setSelectedId(null)}
-                style={{ position: "absolute", inset: 0 }}
-              >
+  width={viewport.w}
+  height={viewport.h}
+  listening={false}
+  onMouseDown={(e) => {
+    // only deselect if user clicks background
+    if (e.target === e.target.getStage()) {
+      setSelectedId(null);
+    }
+  }}
+  style={{ position: "absolute", inset: 0 }}
+>
                 <Layer>
                   {tables.map((t) => (
                     <TableNode key={t.id} t={t} />
