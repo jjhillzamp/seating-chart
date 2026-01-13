@@ -150,6 +150,27 @@ function shapeLabel(type: string): string {
   }
 }
 
+      <div className="rounded-xl border bg-slate-50 p-3">
+            <div className="text-xs font-semibold text-slate-600">Seated here</div>
+            <div className="mt-2 space-y-2">
+              {seatPositions(selected).map((_, i) => {
+                const seatId = `${selected.id}-s${i}`;
+                const sid = assignments[seatId];
+                const s = sid ? studentById.get(sid) : null;
+                useEffect(() => {
+  if (selectedId) {
+    const table = tables.find((t) => t.id === selectedId);
+    if (table) {
+      setDraftName(table.name);
+    }
+  }
+}, [selectedId, tables]);
+                return (
+                  <div key={seatId} className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-slate-200">
+                    <div className="text-slate-500">Seat {i + 1}</div>
+                    <div className={s ? "font-medium" : "text-slate-400"}>{s ? s.name : "—"}</div>
+                  </div>
+
 export default function SeatingChartBuilder() {
   const stageWrapRef = useRef<HTMLDivElement | null>(null);
 
@@ -173,14 +194,7 @@ const [tables, setTables] = useState<Table[]>([]);
   const [assignments, setAssignments] = useState<Assignments>({});
   const [viewport, setViewport] = useState({ w: 900, h: 560 });
 
-  useEffect(() => {
-  if (selectedId) {
-    const table = tables.find((t) => t.id === selectedId);
-    if (table) {
-      setDraftName(table.name);
-    }
-  }
-}, [selectedId, tables]);
+  
 
 
   // Derived
@@ -555,6 +569,7 @@ const pts = seatPositions({
                 const seatId = `${selected.id}-s${i}`;
                 const sid = assignments[seatId];
                 const s = sid ? studentById.get(sid) : null;
+              
                 return (
                   <div key={seatId} className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-sm ring-1 ring-slate-200">
                     <div className="text-slate-500">Seat {i + 1}</div>
