@@ -294,6 +294,29 @@ export default function SeatingChartBuilder() {
    setSelectedId(null);
  }
 
+ function shuffleSeatedStudents() {
+  // Get all seat IDs
+  const seatIds = Object.keys(assignments);
+
+  if (seatIds.length < 2) return;
+
+  // Get the students currently seated
+  const studentIds = seatIds.map((seatId) => assignments[seatId]);
+
+  // Fisher–Yates shuffle
+  for (let i = studentIds.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [studentIds[i], studentIds[j]] = [studentIds[j], studentIds[i]];
+  }
+
+  // Reassign shuffled students to the same seats
+  const next: Assignments = {};
+  seatIds.forEach((seatId, i) => {
+    next[seatId] = studentIds[i];
+  });
+
+  setAssignments(next);
+}
 
  function reseatClear() {
    setAssignments({});
@@ -437,6 +460,13 @@ const pts = seatPositions({
        >
          Clear Seats
        </button>
+       <button
+  className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
+  onClick={shuffleSeatedStudents}
+  title="Randomly reshuffle seated students"
+>
+  Shuffle Seats
+</button>
        <button
          className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
          onClick={clearAll}
