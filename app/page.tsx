@@ -196,6 +196,8 @@ export default function SeatingChartBuilder() {
  const [assignments, setAssignments] = useState<Assignments>({});
  const [viewport, setViewport] = useState({ w: 900, h: 560 });
 
+ const [lockedSeats, setLockedSeats] = useState<Set<string>>(new Set());
+
 
  // Derived
  const studentById = useMemo(() => {
@@ -294,14 +296,26 @@ export default function SeatingChartBuilder() {
    setSelectedId(null);
  }
 
+ function toggleLockSeat(seatId: string) {
+  setLockedSeats((prev) => {
+    const next = new Set(prev);
+    if (next.has(seatId)) {
+      next.delete(seatId);
+    } else {
+      next.add(seatId);
+    }
+    return next;
+  });
+}
+
  function shuffleSeatedStudents() {
-  // Get all seat IDs
   const seatIds = Object.keys(assignments);
 
-  if (seatIds.length < 2) return;
+  // Separate locked and unlocked seats
+  const unlockedSeatIds = seatIds.filter((id) => !lockedSeats.has(id));
+  if (unlockedSeatIds.length < 2) return;
 
-  // Get the students currently seated
-  const studentIds = seatIds.map((seatId) => assignments[seatId]);
+  const studentIds = unlockedSeatIds.map((id) => assignments[id]);
 
   // Fisher–Yates shuffle
   for (let i = studentIds.length - 1; i > 0; i--) {
@@ -309,14 +323,14 @@ export default function SeatingChartBuilder() {
     [studentIds[i], studentIds[j]] = [studentIds[j], studentIds[i]];
   }
 
-  // Reassign shuffled students to the same seats
-  const next: Assignments = {};
-  seatIds.forEach((seatId, i) => {
+  const next: Assignments = { ...assignments };
+  unlockedSeatIds.forEach((seatId, i) => {
     next[seatId] = studentIds[i];
   });
 
   setAssignments(next);
 }
+
 
  function reseatClear() {
    setAssignments({});
