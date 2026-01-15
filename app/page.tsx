@@ -181,6 +181,14 @@ export default function SeatingChartBuilder() {
    "Ava\nBen\nCamila\nDiego\nEthan\nFatima\nGrace\nHugo\nIsabella\nJamal\nKai\nLuna"
  );
 
+ const [undoStack, setUndoStack] = useState<
+  { tables: Table[]; assignments: Assignments }[]
+>([]);
+
+const [redoStack, setRedoStack] = useState<
+  { tables: Table[]; assignments: Assignments }[]
+>([]);
+
 
  const [students, setStudents] = useState(() => {
    return "Ava\nBen\nCamila\nDiego\nEthan\nFatima\nGrace\nHugo\nIsabella\nJamal\nKai\nLuna"
@@ -190,6 +198,49 @@ export default function SeatingChartBuilder() {
      .map((name) => ({ id: uid(), name }));
  });
 
+function pushUndo() {
+  setUndoStack((prev) => [
+    ...prev,
+    { tables, assignments },
+  ]);
+  setRedoStack([]); // clear redo on new action
+}
+
+function undo() {
+  setUndoStack((prev) => {
+    if (prev.length === 0) return prev;
+
+    const last = prev[prev.length - 1];
+
+    setRedoStack((r) => [
+      ...r,
+      { tables, assignments },
+    ]);
+
+    setTables(last.tables);
+    setAssignments(last.assignments);
+
+    return prev.slice(0, -1);
+  });
+}
+
+function redo() {
+  setRedoStack((prev) => {
+    if (prev.length === 0) return prev;
+
+    const next = prev[prev.length - 1];
+
+    setUndoStack((u) => [
+      ...u,
+      { tables, assignments },
+    ]);
+
+    setTables(next.tables);
+    setAssignments(next.assignments);
+
+    return prev.slice(0, -1);
+  });
+}
 
  const [tables, setTables] = useState<Table[]>([]);
  const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -276,6 +327,7 @@ export default function SeatingChartBuilder() {
 
  function deleteSelected() {
    if (!selected) return;
+   pushUndo();
    const keep = tables.filter((t) => t.id !== selected.id);
    setTables(keep);
    setSelectedId(null);
@@ -291,10 +343,12 @@ export default function SeatingChartBuilder() {
 
 
  function clearAll() {
-   setTables([]);
-   setAssignments({});
-   setSelectedId(null);
- }
+  pushUndo(); 
+  setTables([]);
+  setAssignments({});
+  setSelectedId(null);
+}
+
 
  function toggleLockSeat(seatId: string) {
   setLockedSeats((prev) => {
@@ -309,6 +363,7 @@ export default function SeatingChartBuilder() {
 }
 
  function shuffleSeatedStudents() {
+  pushUndo();
   const seatIds = Object.keys(assignments);
 
   // Separate locked and unlocked seats
@@ -333,8 +388,9 @@ export default function SeatingChartBuilder() {
 
 
  function reseatClear() {
-   setAssignments({});
- }
+  pushUndo(); // 👈 ADD THIS LINE
+  setAssignments({});
+}
 
 
  function updateSelected(patch: Partial<Table>) {
