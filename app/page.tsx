@@ -541,7 +541,22 @@ const pts = seatPositions({
          className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
          onClick={clearAll}
          title="Remove all tables/desks"
-       >
+       ><button
+  className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
+  onClick={undo}
+  disabled={undoStack.length === 0}
+>
+  Undo
+</button>
+
+<button
+  className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
+  onClick={redo}
+  disabled={redoStack.length === 0}
+>
+  Redo
+</button>
+
          Clear Room
        </button>
        <button className="rounded-xl bg-slate-900 px-3 py-2 text-sm text-white hover:bg-slate-800" onClick={printNow}>
