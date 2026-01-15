@@ -517,54 +517,56 @@ const pts = seatPositions({
 
 
  const Header = () => (
-   <div className="no-print flex items-center justify-between gap-3 border-b bg-white px-4 py-3">
-     <div className="flex items-center gap-3">
-       <div className="text-lg font-semibold">Seating Chart Builder</div>
-       <div className="rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600">Free Prototype</div>
-     </div>
-     <div className="flex items-center gap-2">
-       <button
-         className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
-         onClick={reseatClear}
-         title="Clear all seat assignments"
-       >
-         Clear Seats
-       </button>
-       <button
-  className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
-  onClick={shuffleSeatedStudents}
-  title="Randomly reshuffle seated students"
->
-  Shuffle Seats
-</button>
-       <button
-         className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
-         onClick={clearAll}
-         title="Remove all tables/desks"
-       ><button
-  className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
-  onClick={undo}
-  disabled={undoStack.length === 0}
->
-  Undo
-</button>
+  <div className="no-print flex items-center justify-between gap-3 border-b bg-white px-4 py-3">
+    <div className="flex items-center gap-3">
+      <div className="text-lg font-semibold">Seating Chart Builder</div>
+    </div>
 
-<button
-  className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
-  onClick={redo}
-  disabled={redoStack.length === 0}
->
-  Redo
-</button>
+    <div className="flex items-center gap-2">
+      <button
+        className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
+        onClick={undo}
+      >
+        Undo
+      </button>
 
-         Clear Room
-       </button>
-       <button className="rounded-xl bg-slate-900 px-3 py-2 text-sm text-white hover:bg-slate-800" onClick={printNow}>
-         Print
-       </button>
-     </div>
-   </div>
- );
+      <button
+        className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
+        onClick={redo}
+      >
+        Redo
+      </button>
+
+      <button
+        className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
+        onClick={reseatClear}
+      >
+        Clear Seats
+      </button>
+
+      <button
+        className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
+        onClick={shuffleSeatedStudents}
+      >
+        Shuffle Seats
+      </button>
+
+      <button
+        className="rounded-xl border px-3 py-2 text-sm hover:bg-slate-50"
+        onClick={clearAll}
+      >
+        Clear Room
+      </button>
+
+      <button
+        className="rounded-xl bg-slate-900 px-3 py-2 text-sm text-white hover:bg-slate-800"
+        onClick={printNow}
+      >
+        Print
+      </button>
+    </div>
+  </div>
+);
 
 
  const Sidebar = () => (
