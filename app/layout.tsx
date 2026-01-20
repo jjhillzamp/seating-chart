@@ -24,11 +24,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+     <body
+  className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+>
+  {children}
+
+  <footer
+  style={{
+    marginTop: "40px",
+    padding: "20px",
+    textAlign: "center",
+    fontSize: "14px",
+    color: "#666",
+  }}
+>
+  © {new Date().getFullYear()} SeatingChartCreator ·{" "}
+  <a href="/privacy" style={{ color: "#666", textDecoration: "underline" }}>
+    Privacy
+  </a>{" "}
+  ·{" "}
+  <a href="/about" style={{ color: "#666", textDecoration: "underline" }}>
+    About
+  </a>
+</footer>
+</body>
     </html>
   );
 }
